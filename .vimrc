@@ -1,9 +1,9 @@
-set nocompatible              " be iMproved, required
-filetype off                  " required
+"set nocompatible              " be iMproved, required
+"filetype off                  " required
 
 " set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+"set rtp+=~/.vim/bundle/Vundle.vim
+"call vundle#begin()
 " alternatively, pass a path where Vundle should install plugins
 "call vundle#begin('~/some/path/here')
 
@@ -30,17 +30,12 @@ Plugin 'VundleVim/Vundle.vim'
 " All of your Plugins must be added before the following line
 
 " ALL OF THE ACTUAL PLUGINS
-"Completion
-Plugin 'Valloric/YouCompleteMe'
-
-"Better syntax highlighting
-Plugin 'octol/vim-cpp-enhanced-highlight'
 
 "Dark theme
-Plugin 'dracula/vim'
+"Plugin 'dracula/vim'
 
-call vundle#end()            " required
-filetype plugin indent on    " required
+"call vundle#end()            " required
+"filetype plugin indent on    " required
 " To ignore plugin indent changes, instead use:
 "filetype plugin on
 "
@@ -61,5 +56,4 @@ set nu
 syntax on
 set showmatch
 set comments=s1:/*,mb:\ *,e1x:\ */
-color dracula
-let ycm_autoclose_preview_window_after_completion=1
+"color dracula
