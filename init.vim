@@ -36,20 +36,38 @@ highlight ColorColumn ctermbg=0 guibg=lightgrey
 
 call plug#begin('~/.vim/plugged')
 
-Plug 'morhetz/gruvbox'
+Plug 'gruvbox-community/gruvbox'
 
-"Plug 'ycm-core/YouCompleteMe'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'mbbill/undotree'
 
-"VIM APM for prime - get rid of later
-Plug 'ThePrimeagen/vim-apm'
+"nvim-lsp stuff
+Plug 'neovim/nvim-lspconfig'
+Plug 'tjdevries/lsp_extensions.nvim'
+Plug 'nvim-lua/completion-nvim'
+
+"Telescope
+Plug 'nvim-lua/popup.nvim'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-lua/telescope.nvim'
 
 call plug#end()
+
+let g:gruvbox_contrast_dark = 'hard'
+if exists('+termguicolors')
+    let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+    let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+endif
+let g:gruvbox_invert_selection='0'
 
 colorscheme gruvbox
 set background=dark
 
+"Telescope settings
+let g:telescope_cache_results = 1
+let g:telescope_prime_fuzzy_find = 1
+
+"mappings
 let mapleader = " "
 
 nnoremap <leader>h :wincmd h<CR>
@@ -61,17 +79,6 @@ nnoremap <leader>pv :wincmd v<bar> :Ex <bar> :vertical resize 30<CR>
 nnoremap <Leader>ps :Rg<SPACE>
 nnoremap <silent> <Leader>+ :vertical resize +5<CR>
 nnoremap <silent> <Leader>- :vertical resize -5<CR>
-
-fun! GoYCM()
-    nnoremap <buffer> <silent> <leader>gd :YcmCompleter GoTo<CR>
-    nnoremap <buffer> <silent> <leader>gr :YcmCompleter GoToReferences<CR>
-    nnoremap <buffer> <silent> <leader>rr :YcmCompleter RefactorRename<space>
-endfun
-
-function! s:check_back_space() abort
-    let col = col('.') - 1
-    return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
 
 fun! GoCoc()
     inoremap <buffer> <silent><expr> <TAB>
@@ -96,8 +103,8 @@ fun! TrimWhitespace()
     call winrestview(l:save)
 endfun
 
-"autocmd BufWritePre * :call TrimWhitespace()
-"autocmd FileType typescript,python :call GoYCM()
-"autocmd FileType cpp,cxx,h,hpp,c :call GoCoc()
-:call GoCoc()
-
+":call GoCoc()
+set completeopt=menuone,noinsert,noselect
+let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy']
+lua require'nvim_lsp'.clangd.setup{ on_attach=require'completion'.on_attach }
+lua require'nvim_lsp'.tsserver.setup{ on_attach=require'completion'.on_attach }
