@@ -51,6 +51,9 @@ Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-lua/telescope.nvim'
 
+"vim debugging... maybe this is a bad idea?
+Plug 'puremourning/vimspector'
+
 call plug#end()
 
 let g:gruvbox_contrast_dark = 'hard'
@@ -70,6 +73,8 @@ let g:telescope_prime_fuzzy_find = 1
 "mappings
 let mapleader = " "
 
+let g:vimspector_enable_mappings = 'HUMAN'
+
 nnoremap <leader>h :wincmd h<CR>
 nnoremap <leader>j :wincmd j<CR>
 nnoremap <leader>k :wincmd k<CR>
@@ -79,6 +84,9 @@ nnoremap <leader>pv :wincmd v<bar> :Ex <bar> :vertical resize 30<CR>
 nnoremap <Leader>ps :Rg<SPACE>
 nnoremap <silent> <Leader>+ :vertical resize +5<CR>
 nnoremap <silent> <Leader>- :vertical resize -5<CR>
+nnoremap <silent> <leader><F10> :call vimspector#StepInto()<CR>
+nnoremap <leader><F5> :VimspectorReset<CR>
+
 
 fun! GoCoc()
     inoremap <buffer> <silent><expr> <TAB>
@@ -108,3 +116,4 @@ set completeopt=menuone,noinsert,noselect
 let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy']
 lua require'nvim_lsp'.clangd.setup{ on_attach=require'completion'.on_attach }
 lua require'nvim_lsp'.tsserver.setup{ on_attach=require'completion'.on_attach }
+
