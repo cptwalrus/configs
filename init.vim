@@ -84,8 +84,12 @@ nnoremap <leader>pv :wincmd v<bar> :Ex <bar> :vertical resize 30<CR>
 nnoremap <Leader>ps :Rg<SPACE>
 nnoremap <silent> <Leader>+ :vertical resize +5<CR>
 nnoremap <silent> <Leader>- :vertical resize -5<CR>
+
+"vimspector mappings
 nnoremap <silent> <leader><F10> :call vimspector#StepInto()<CR>
-nnoremap <leader><F5> :VimspectorReset<CR>
+nnoremap <silent> <leader><F5> :call vimspector#LaunchWithSettings( #{ configuration: 'Default' } )<CR>
+nnoremap <leader><F4> :VimspectorReset<CR>
+nnoremap <leader>w :VimspectorWatch<space> 
 
 
 fun! GoCoc()
