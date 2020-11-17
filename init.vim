@@ -38,7 +38,6 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'gruvbox-community/gruvbox'
 
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'mbbill/undotree'
 
 "nvim-lsp stuff
@@ -53,6 +52,9 @@ Plug 'nvim-lua/telescope.nvim'
 
 "vim debugging... maybe this is a bad idea?
 Plug 'puremourning/vimspector'
+
+"GLSL syntax
+Plug 'tikhomirov/vim-glsl'
 
 call plug#end()
 
