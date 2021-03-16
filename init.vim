@@ -14,6 +14,10 @@ set nobackup
 set undodir=~/.vim/undodir
 set undofile
 set incsearch
+set nohlsearch
+set relativenumber
+set scrolloff=8
+set signcolumn=yes
 
 
 "
@@ -102,7 +106,7 @@ endfun
 
 set completeopt=menuone,noinsert,noselect
 let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy']
-lua require'nvim_lsp'.clangd.setup{ on_attach=require'completion'.on_attach }
-lua require'nvim_lsp'.tsserver.setup{ on_attach=require'completion'.on_attach }
-lua require'nvim_lsp'.pyls.setup{ on_attach=require'completion'.on_attach }
+lua require'lspconfig'.clangd.setup{ on_attach=require'completion'.on_attach }
+lua require'lspconfig'.tsserver.setup{ on_attach=require'completion'.on_attach }
+lua require'lspconfig'.pyls.setup{ on_attach=require'completion'.on_attach }
 
