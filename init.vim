@@ -15,7 +15,6 @@ set undodir=~/.vim/undodir
 set undofile
 set incsearch
 set nohlsearch
-set relativenumber
 set scrolloff=8
 set signcolumn=yes
 
