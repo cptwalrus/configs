@@ -116,12 +116,12 @@ if ! shopt -oq posix; then
   fi
 fi
 
-   UE_HOME=/home/batman/UnrealEngine
+   UE_HOME=/home/batman/Documents/unreal_engine/UnrealEngine
    
    function unrealbuild {
             CURR_DIR=`pwd`;
             PROJ_NAME=$(basename ${1%.uproject});
-            $UE_HOME/Engine/Build/BatchFiles/Linux/Build.sh $PROJ_NAME Linux Development -editorrecompile "${CURR_DIR}/${PROJ_NAME}.uproject" -progress -editor -game -NoHotReloadFromIDE
+            $UE_HOME/Engine/Build/BatchFiles/Linux/Build.sh $PROJ_NAME Linux Development "${CURR_DIR}/${PROJ_NAME}.uproject" -waitmutex
    }
    complete -f -X '!*.@(uproject)' unrealbuild
    
@@ -145,7 +145,6 @@ fi
            $UE_HOME/Engine/Binaries/Linux/UE4Editor $DIR/$1 -Game -ExecCmds="Automation RunTests $2" -log
    }
    complete -f -X '!*.@(uproject)' unrealtest
-
 
    alias tmux="TERM=screen-256color-bce tmux"
 

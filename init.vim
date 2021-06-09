@@ -71,19 +71,12 @@ let g:gruvbox_invert_selection='0'
 colorscheme gruvbox
 set background=dark
 
-"Telescope settings
-let g:telescope_cache_results = 1
-let g:telescope_prime_fuzzy_find = 1
 
 "mappings
 let mapleader = " "
 
 let g:vimspector_enable_mappings = 'HUMAN'
 
-nnoremap <leader>h :wincmd h<CR>
-nnoremap <leader>j :wincmd j<CR>
-nnoremap <leader>k :wincmd k<CR>
-nnoremap <leader>l :wincmd l<CR>
 nnoremap <leader>u :UndotreeShow<CR>
 nnoremap <leader>pv :wincmd v<bar> :Ex <bar> :vertical resize 30<CR>
 nnoremap <Leader>ps :Rg<SPACE>
@@ -96,6 +89,28 @@ nnoremap <silent> <leader><F5> :call vimspector#LaunchWithSettings( #{ configura
 nnoremap <leader><F4> :VimspectorReset<CR>
 nnoremap <leader>w :VimspectorWatch<space> 
 
+"Telescope settings
+let g:telescope_cache_results = 1
+let g:telescope_prime_fuzzy_find = 1
+nnoremap <leader>ps :lua require('telescope.builtin').grep_string({ search = vim.fn.input("Grep For > ")})<CR>
+nnoremap <C-p> :lua require('telescope.builtin').git_files()<CR>
+nnoremap <Leader>pf :lua require('telescope.builtin').find_files()<CR>
+
+nnoremap <leader>pw :lua require('telescope.builtin').grep_string { search = vim.fn.expand("<cword>") }<CR>
+nnoremap <leader>pb :lua require('telescope.builtin').buffers()<CR>
+nnoremap <leader>vh :lua require('telescope.builtin').help_tags()<CR>
+
+"LSP stuff shamelessly stolen from ThePrimeagen
+nnoremap <leader>vd :lua vim.lsp.buf.definition()<CR>
+nnoremap <leader>vi :lua vim.lsp.buf.implementation()<CR>
+nnoremap <leader>vsh :lua vim.lsp.buf.signature_help()<CR>
+nnoremap <leader>vrr :lua vim.lsp.buf.references()<CR>
+nnoremap <leader>vrn :lua vim.lsp.buf.rename()<CR>
+nnoremap <leader>vh :lua vim.lsp.buf.hover()<CR>
+nnoremap <leader>vca :lua vim.lsp.buf.code_action()<CR>
+nnoremap <leader>vsd :lua vim.lsp.util.show_line_diagnostics(); vim.lsp.util.show_line_diagnostics()<CR>
+nnoremap <leader>vn :lua vim.lsp.diagnostic.goto_next()<CR>
+nnoremap <leader>vll :call LspLocationList()<CR>
 
 fun! TrimWhitespace()
     let l:save = winsaveview()
