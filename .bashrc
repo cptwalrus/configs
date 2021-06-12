@@ -149,3 +149,4 @@ fi
    alias tmux="TERM=screen-256color-bce tmux"
 
    export PATH="/home/batman/.local/bin:/home/batman/Documents/third_party_tools/clangd_10.0.0/bin/:$PATH"
+. "$HOME/.cargo/env"

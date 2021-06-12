@@ -59,6 +59,9 @@ Plug 'puremourning/vimspector'
 "GLSL syntax
 Plug 'tikhomirov/vim-glsl'
 
+"Rust stuff
+Plug 'rust-lang/rust.vim'
+
 call plug#end()
 
 let g:gruvbox_contrast_dark = 'hard'
@@ -123,4 +126,4 @@ let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy']
 lua require'lspconfig'.clangd.setup{ on_attach=require'completion'.on_attach }
 lua require'lspconfig'.tsserver.setup{ on_attach=require'completion'.on_attach }
 lua require'lspconfig'.pyls.setup{ on_attach=require'completion'.on_attach }
-
+lua require'lspconfig'.rust_analyzer.setup{ on_attach=require'completion'.on_attach }
