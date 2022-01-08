@@ -65,6 +65,9 @@ Plug 'tikhomirov/vim-glsl'
 "Rust stuff
 Plug 'rust-lang/rust.vim'
 
+"Godot Stuff
+Plug 'habamax/vim-godot'
+
 call plug#end()
 
 let g:gruvbox_contrast_dark = 'hard'
@@ -180,7 +183,7 @@ sources = cmp.config.sources({
   })
 
   -- Setup lspconfig.
-  local servers = { 'clangd', 'rust_analyzer', 'pylsp', 'tsserver' }
+  local servers = { 'clangd', 'rust_analyzer', 'pylsp', 'tsserver', 'gdscript' }
   local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
   -- Replace <YOUR_LSP_SERVER> with each lsp server you've enabled.
   for _, lsp in ipairs(servers) do
