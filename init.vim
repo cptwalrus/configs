@@ -43,6 +43,8 @@ Plug 'gruvbox-community/gruvbox'
 
 Plug 'mbbill/undotree'
 
+Plug 'tree-sitter/tree-sitter'
+
 "nvim-lsp stuff
 Plug 'neovim/nvim-lspconfig'
 Plug 'tjdevries/lsp_extensions.nvim'
