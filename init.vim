@@ -57,6 +57,7 @@ Plug 'hrsh7th/vim-vsnip'
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-lua/telescope.nvim'
+Plug 'BurntSushi/ripgrep'
 
 "vim debugging... maybe this is a bad idea?
 Plug 'puremourning/vimspector'
