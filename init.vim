@@ -17,6 +17,8 @@ set incsearch
 set nohlsearch
 set scrolloff=8
 set signcolumn=yes
+set splitright
+set splitbelow
 
 
 "
@@ -87,15 +89,48 @@ set background=dark
 "mappings
 let mapleader = " "
 
-let g:vimspector_enable_mappings = 'HUMAN'
 
+"Block commenting
+function BlockComment()
+    let l:comment=split(&commentstring, '%s')
+    if len(comment)==1
+        call add(comment, '')
+    endif
+    let l:currMode=mode()
+    if getline(".") =~ '^\s*'. l:comment[0]
+        let l:commentLen = strchars(l:comment[0])
+        let l:normalMatch = ':s/^.\{' . l:commentLen . '}//'
+        let l:visualMatch = ":'<,'>s/^.\{" . l:commentLen . '}//'
+        if l:currMode == "V"
+            :execute l:visualMatch
+        elseif l:currMode == "n"
+            :execute l:normalMatch
+        endif
+    else
+        if l:currMode == "V"
+            :'<,'>s/^/\=l:comment[0]/
+        elseif l:currMode == "n"
+            :s/^/\=l:comment[0]/
+        endif
+    endif
+endfunction
+
+noremap <leader>c :call BlockComment()<CR>
+
+
+"Terminal
+"This will probably not work on normal vim
+nnoremap <leader>t :vert term://bash<CR>  
+nnoremap <leader>t :terminal<CR>
+tnoremap <Esc> <C-\><C-n>
+
+"undo tree and split resizing
 nnoremap <leader>u :UndotreeShow<CR>
-nnoremap <leader>pv :wincmd v<bar> :Ex <bar> :vertical resize 30<CR>
-nnoremap <Leader>ps :Rg<SPACE>
 nnoremap <silent> <Leader>+ :vertical resize +5<CR>
 nnoremap <silent> <Leader>- :vertical resize -5<CR>
 
 "vimspector mappings
+let g:vimspector_enable_mappings = 'HUMAN'
 nnoremap <silent> <leader><F10> :call vimspector#StepInto()<CR>
 nnoremap <silent> <leader><F5> :call vimspector#LaunchWithSettings( #{ configuration: 'Default' } )<CR>
 nnoremap <leader><F4> :VimspectorReset<CR>
