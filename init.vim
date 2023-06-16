@@ -59,7 +59,8 @@ Plug 'hrsh7th/cmp-vsnip'
 Plug 'hrsh7th/vim-vsnip'
 Plug 'hrsh7th/cmp-cmdline'
 Plug 'ray-x/lsp_signature.nvim'
-Plug 'rafamadriz/friendly-snippets'
+"Plug 'rafamadriz/friendly-snippets'
+Plug 'windwp/nvim-autopairs'
 
 "Telescope
 Plug 'nvim-lua/popup.nvim'
@@ -246,9 +247,12 @@ cmp.setup({
 
     require("lsp_signature").setup(signature_config)
 
+  -- Setup autopairs
+  require("nvim-autopairs").setup {}
+
   -- Setup lspconfig.
   local servers = { 'clangd', 'rust_analyzer', 'pylsp', 'tsserver', 'gdscript' }
-  local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+  local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
   -- Replace <YOUR_LSP_SERVER> with each lsp server you've enabled.
   for _, lsp in ipairs(servers) do
 

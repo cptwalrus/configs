@@ -14,25 +14,25 @@ ln -s $INITVIM $INITVIMDEST
 echo "[+] Init.vim installed and linked"
 
 echo "[-] Checking for python3-pip..."
-if [ $(dpkg-query -W -f='${Status}' python3-pip 2>/dev/null | grep -c "ok installed")  -eq 0 ]
-then
-	echo "[*] python3-pip not installed, installing now..."
-	sudo apt install python3-pip
-	echo "[+] python3-pip installed!"
-else
-	echo "[+] python3-pip already installed!"
-fi
+#if [ $(dpkg-query -W -f='${Status}' python3-pip 2>/dev/null | grep -c "ok installed")  -eq 0 ]
+#then
+#	echo "[*] python3-pip not installed, installing now..."
+#	sudo apt install python3-pip
+#	echo "[+] python3-pip installed!"
+#else
+#	echo "[+] python3-pip already installed!"
+#fi
 
 
-echo "[-] Checking for pynvim"
-if [ $(pip3 list 2>/dev/null | grep -c "pynvim") -eq 0 ]
-then
-	echo "[*] pynvim not installed, installing now..."
-	pip3 install pynvim
-	echo "[+] pynvim installed!"
-else
-	echo "[+] pynvim already installed!"
-fi
+#echo "[-] Checking for pynvim"
+#if [ $(pip3 list 2>/dev/null | grep -c "pynvim") -eq 0 ]
+#then
+#	echo "[*] pynvim not installed, installing now..."
+#	pip3 install pynvim
+#	echo "[+] pynvim installed!"
+#else
+#	echo "[+] pynvim already installed!"
+#fi
 
 echo "[-] Creating paths and installing vim-plug"
 
