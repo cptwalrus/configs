@@ -67,17 +67,13 @@ Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-lua/telescope.nvim'
 Plug 'BurntSushi/ripgrep'
 
-"vim debugging... maybe this is a bad idea?
-Plug 'puremourning/vimspector'
-
 "GLSL syntax
 Plug 'tikhomirov/vim-glsl'
 
 "Rust stuff
 Plug 'rust-lang/rust.vim'
 
-"Godot Stuff
-Plug 'habamax/vim-godot'
+Plug 'mfussenegger/nvim-dap'
 
 "vimairline
 Plug 'vim-airline/vim-airline'
@@ -137,13 +133,6 @@ tnoremap <Esc> <C-\><C-n>
 nnoremap <leader>u :UndotreeShow<CR>
 nnoremap <silent> <Leader>+ :vertical resize +5<CR>
 nnoremap <silent> <Leader>- :vertical resize -5<CR>
-
-"vimspector mappings
-let g:vimspector_enable_mappings = 'HUMAN'
-nnoremap <silent> <leader><F10> :call vimspector#StepInto()<CR>
-nnoremap <silent> <leader><F5> :call vimspector#LaunchWithSettings( #{ configuration: 'Default' } )<CR>
-nnoremap <leader><F4> :VimspectorReset<CR>
-nnoremap <leader>w :VimspectorWatch<space> 
 
 "Telescope settings
 let g:telescope_cache_results = 1
@@ -253,7 +242,7 @@ cmp.setup({
   require("nvim-autopairs").setup {}
 
   -- Setup lspconfig.
-  local servers = { 'clangd', 'rust_analyzer', 'pylsp', 'tsserver', 'gdscript', "gopls" }
+  local servers = { 'clangd', 'rust_analyzer', 'pylsp', "gopls" }
   local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
   -- Replace <YOUR_LSP_SERVER> with each lsp server you've enabled.
   for _, lsp in ipairs(servers) do
@@ -262,4 +251,29 @@ cmp.setup({
           capabilities = capabilities
           }
   end
+
+  -- Godot specific lsp/editor stuff
+  require("lspconfig")["gdscript"].setup({
+  name = "godot",
+  cmd = vim.lsp.rpc.connect("127.0.0.1", "6005"),
+  capabilities = capabilities,
+  })
+
+  -- Dap
+  local dap = require("dap")
+  dap.adapters.godot = {
+    type = "server",
+    host = "127.0.0.1",
+    port = 6006,
+    }
+
+  dap.configurations.gdscript = {
+    {
+        type = "godot",
+        requrest = "launch",
+        name = "Launch scene",
+        project = "${workspaceFolder}",
+        launch_scene = true,
+    },
+    }
 EOF
