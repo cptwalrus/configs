@@ -73,7 +73,6 @@ Plug 'tikhomirov/vim-glsl'
 "Rust stuff
 Plug 'rust-lang/rust.vim'
 
-Plug 'mfussenegger/nvim-dap'
 
 "vimairline
 Plug 'vim-airline/vim-airline'
@@ -252,28 +251,4 @@ cmp.setup({
           }
   end
 
-  -- Godot specific lsp/editor stuff
-  require("lspconfig")["gdscript"].setup({
-  name = "godot",
-  cmd = vim.lsp.rpc.connect("127.0.0.1", "6005"),
-  capabilities = capabilities,
-  })
-
-  -- Dap
-  local dap = require("dap")
-  dap.adapters.godot = {
-    type = "server",
-    host = "127.0.0.1",
-    port = 6006,
-    }
-
-  dap.configurations.gdscript = {
-    {
-        type = "godot",
-        requrest = "launch",
-        name = "Launch scene",
-        project = "${workspaceFolder}",
-        launch_scene = true,
-    },
-    }
 EOF
